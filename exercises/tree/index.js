@@ -21,13 +21,44 @@ class Node {
         this.children.push(new Node(data));
     }
 
-    remove(child){
-        for(let chi of this.children){
-            if()
-        }
+    remove(data){
+        //executes funtion on every element
+        //if truthy, element remains in array
+        //if falsy, element removed from array
+
+        this.children=this.children.filter(element=>{
+            return element.data !==data
+        })
     }
 }
 
-class Tree {}
+class Tree {
+    constructor(){
+        this.root= null;
+    }
+
+    traverseBF(fn){
+        const arr = [this.root]
+        while(arr.length){
+            //take out first element of array
+            const node=arr.shift()
+            //take all the elements in children and send them into end of arr
+            arr.push(...node.children)
+            fn(node);
+        }
+    }
+
+    traverseDF(fn){
+        const arr = [this.root]
+        while(arr.length){
+            //take out first element of array
+            const node=arr.shift()
+            //take all the elements in children and send them into beg of arr
+            arr.unshift(...node.children)
+            fn(node);
+        }
+    }
+
+}
 
 module.exports = { Tree, Node };
